@@ -1,5 +1,3 @@
-# Vue 轻量级后台管理系统基础模板
-
 
 ```
 git clone https://github.com/woai3c/vue-admin-template.git

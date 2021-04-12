@@ -3,7 +3,7 @@
   title="提示"
   :visible.sync="dialogVisible"
   width="30%"
-  :before-close="handleClose">
+  :before-close="resetForm">
   <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
                 <el-form-item label="昵称" prop="nickName">
                     <el-input v-model="ruleForm.nickName"></el-input>
@@ -26,23 +26,28 @@
                     </el-radio-group>
                 </el-form-item>
                 <div class="btns">
-                    <el-button @click="resetForm('ruleForm')" class="btn" size="small">取消</el-button>
+                    <el-button @click="resetForm" class="btn" size="small">取消</el-button>
                     <el-button type="primary" @click="submitForm('ruleForm')" class="btn" size="small">确定</el-button>
                 </div>
             </el-form>
 </el-dialog>
 </template>
 <script>
-import {registerMember} from '@/api'
+
 export default {
     props:{
         ruleForm:{
             type:Object,
             default:()=>{}
+        },
+        isShowModal:{
+            type:Boolean,
+            default:()=>false
         }
     },
+
     computed:{
-            isShowModal1:{
+            dialogVisible:{
                 get: function () { return this.isShowModal } ,
                 set: function (val) { }
             }
@@ -60,23 +65,15 @@ export default {
       submitForm(formName) {
         this.$refs[formName].validate((valid) => {
           if (valid) {
-            registerMember(this.ruleForm).then(res=>{
-                if(res.code==200&&res.data){
-                  this.$message.success(res.msg+'去登录')
-                  this.$router.push({path:'/login'})
-                }else{
-                  this.$message.error(res.msg)
-                }
-            })
+            this.$emit('modalSure',this.ruleForm)
           } else {
-            console.log('error submit!!');
             return false;
           }
         });
       },
-      resetForm(formName) {
-        this.$refs[formName].resetFields();
-
+      resetForm() {
+        this.dialogVisible=false
+        this.$emit('modalCancel')
       }
     }
   }

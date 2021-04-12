@@ -69,6 +69,7 @@ export default {
                         // 登陆成功 假设这里是后台返回的 token
                         localStorage.setItem('token', 'i_am_token')
                         localStorage.setItem('userinfo',JSON.stringify(res.data))
+                        this.$store.commit('setNickName')
                         this.$router.push({ path: this.redirect || '/' })
                     }else{
                         this.$message.error(res.msg)

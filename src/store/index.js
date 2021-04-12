@@ -33,6 +33,7 @@ const store = new Vuex.Store({
                 text: '通知公告',
             }
         ],
+        nickName:''
     },
     mutations: {
         setMenus(state, items) {
@@ -41,6 +42,10 @@ const store = new Vuex.Store({
         setLoading(state, isShowLoading) {
             state.isShowLoading = isShowLoading
         },
+        setNickName(state) {
+            const name=JSON.parse(localStorage.getItem('userinfo')).nickName
+            state.nickName = name
+        }
     },
 })
 

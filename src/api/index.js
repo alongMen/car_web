@@ -10,3 +10,6 @@ export function login(data) {
 export function changePwd(data) {
     return request.post('member/update-pass',data)
 }
+export function changeUserinfo(data) {
+    return request.post('member/update-info',data)
+}

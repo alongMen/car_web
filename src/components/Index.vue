@@ -99,7 +99,7 @@
                         <!-- 下拉菜单 -->
                         <Dropdown trigger="click" @on-click="userOperate" @on-visible-change="showArrow">
                             <div class="pointer">
-                                <span>{{userName}}</span>
+                                <span>{{$store.state.nickName}}</span>
                                 <Icon v-show="arrowDown" type="md-arrow-dropdown"/>
                                 <Icon v-show="arrowUp" type="md-arrow-dropup"/>
                             </div>
@@ -218,6 +218,7 @@ export default {
         }
     },
     mounted() {
+        this.$store.commit('setNickName')
         // 第一个标签
         const name = this.$route.name
         this.currentPage = name
@@ -372,7 +373,7 @@ export default {
                     break
                 case '2':
                     // 基本资料
-                    this.gotoPage('userinfo')
+                    this.$router.push({ path: '/userinfo' })
                     break
                 case '3':
                     resetTokenAndClearUser()

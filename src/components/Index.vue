@@ -555,7 +555,7 @@ export default {
                         on: {
                             click() {
                                 // 点击查看跳转到消息页
-                                self.gotoPage('msg')
+                                self.gotoPage('notice')
                                 self.hasNewMsg = false
                                 self.msgNum = 0
                             },

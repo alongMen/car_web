@@ -21,10 +21,28 @@ const store = new Vuex.Store({
                 text: '个人信息', // 点击侧边栏跳到一个单独的路由页面，需要提前在 router.js 定义
             },
             {
+                name: 'memberList',
+                size: 18,
+                type: 'ios-egg-outline',
+                text: '会员列表',
+            },
+            {
+                name: 'clerkList',
+                size: 18,
+                type: 'ios-egg-outline',
+                text: '店员管理',
+            },
+            {
                 name:'pre',
                 size: 18, // icon大小
                 type: 'md-arrow-forward', // icon类型
                 text: '美护预约',
+            },
+            {
+                name:'shop',
+                size: 18, // icon大小
+                type: 'md-arrow-forward', // icon类型
+                text: '汽车饰品商店',
             },
             {
                 name:'notice',

@@ -39,6 +39,17 @@ export const asyncRoutes = {
         meta: { title: '会员信息' },
         component: () => import('@/views/UserInfo.vue'),
     },
+    memberList:{
+        path: '/memberList',
+        name: 'memberList',
+        meta: { title: '会员管理' },
+        component: () => import('@/views/memberList.vue'),
+    },clerkList:{
+        path: '/clerkList',
+        name: 'clerkList',
+        meta: { title: '店员管理' },
+        component: () => import('@/views/clerkList.vue'),
+    },
     notice:{
         path: '/notice',
         name: 'notice',
@@ -50,6 +61,12 @@ export const asyncRoutes = {
         name: 'pre',
         meta: { title: '美护预约' },
         component: () => import('@/views/pre.vue'),
+    },
+    shop:{
+        path: '/shop',
+        name: 'shop',
+        meta: { title: '汽车饰品商店' },
+        component: () => import('@/views/shop.vue'),
     },
 }
 

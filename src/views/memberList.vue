@@ -45,7 +45,7 @@
 import Table from '@/components/table.vue'
 import {getMemberList}  from '@/api'
 export default {
-  name:'notice',
+  name:'memberList',
     components:{
         Table
     },

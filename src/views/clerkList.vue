@@ -9,33 +9,37 @@
           :currentPage="currentPage"
           :needRemove="false"
           :needEdit="true"
-          tableEditText="会员信息"
+          tableEditText="店员信息"
           @edit="handleEdit"
           @changePage="handleChangePage"
           @handleSizeChange="handleSizeChange"
         />
-        <el-dialog title="收货地址" :visible.sync="dialogTableVisible">
+        <el-dialog title="店员信息" :visible.sync="dialogTableVisible">
           <el-card class="box-card">
             <div slot="header" class="clearfix">
-                <span>会员信息</span>
+                <span>店员信息</span>
             </div>
             <div class="user_box">
+              <div class="item">
+                    <div class="label">ID：</div>
+                    <div class="value">{{userinfo.id}}</div>
+                </div>
                 <div class="item">
-                    <div class="label">昵称：</div>
-                    <div class="value">{{userinfo.nickName}}</div>
+                    <div class="label">姓名：</div>
+                    <div class="value">{{userinfo.empName}}</div>
                 </div>
                 <div class="item">
                     <div class="label">电话：</div>
-                    <div class="value">{{userinfo.phoneNumber}}</div>
+                    <div class="value">{{userinfo.empPhone}}</div>
                 </div>
-                <div class="item">
+                <!-- <div class="item">
                     <div class="label">性别：</div>
                     <div class="value">{{userinfo.gender}}</div>
                 </div>
                 <div class="item">
                     <div class="label">生日：</div>
                     <div class="value">{{userinfo.birth}}</div>
-                </div>
+                </div> -->
             </div>
         </el-card>
       </el-dialog>
@@ -43,9 +47,9 @@
 </template>
 <script>
 import Table from '@/components/table.vue'
-import {getMemberList}  from '@/api'
+import {getclerkList}  from '@/api'
 export default {
-  name:'notice',
+  name:'memberList',
     components:{
         Table
     },
@@ -53,11 +57,9 @@ export default {
         return{
           dialogTableVisible:false,
           tableModel: [
-          { attribute: 'nickName', dontSort: true, type: 'normal', title: '昵称' },
-          { attribute: 'gender', dontSort: true, type: 'normal', title: '性别' },
-          { attribute: 'phoneNumber', dontSort: true, type: 'normal', title: '手机号' },
-          { attribute: 'birth', dontSort: true, type: 'normal', title: '生日' },
-          {attribute: 'createTime', dontSort: true, type: 'normal', title: '注册时间'}
+          { attribute: 'id', dontSort: true, type: 'normal', title: '店员ID' },
+          { attribute: 'empName', dontSort: true, type: 'normal', title: '姓名' },
+          { attribute: 'empPhone', dontSort: true, type: 'normal', title: '手机号' },
         ],
         tableData: [],
         total: 20,
@@ -75,7 +77,7 @@ export default {
         this.dialogTableVisible=true
       },
         initTableData(){
-          getMemberList(this.currentPage).then(res=>{
+          getclerkList(this.currentPage).then(res=>{
             // console.log(res)
             if(res.code==200&&res.data){
               this.tableData=res.data

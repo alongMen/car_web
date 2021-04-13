@@ -13,3 +13,18 @@ export function changePwd(data) {
 export function changeUserinfo(data) {
     return request.post('member/update-info',data)
 }
+export function getMemberList(data) {
+    return request.get('member/find-members/'+data)
+}
+export function getclerkList(data) {
+    return request.get('employee/emp-info/'+data)
+}
+export function getPreList(data) {
+    return request.get('order/find-order/reservation/'+data)
+}
+export function preSubmit(data) {
+    return request.post('order/submit-order',data)
+}
+export function setEmp(data) {
+    return request.post('order/set-emp',data)
+}

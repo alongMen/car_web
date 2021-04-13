@@ -1,29 +1,55 @@
 <template>
     <div class="home-container">
         <div class="home-content">
-            <Button @click="getUserData">ajax 测试</Button>
-
-            <Input :rows="30" style="margin-top: 20px" v-model="userInfo" type="textarea" />
+            <el-button type="danger" icon="el-icon-phone-outline" class="btn" @click="handlePre">立即预约</el-button>
+            <div class="banner">
+                <img src="@/assets/imgs/banner.png" alt="">
+            </div>
         </div>
+        <Modal
+            :isShowModal="isShowModal"
+            @modalCancel="modalCancel"
+            @modalSure="modalSure"
+        />
     </div>
 </template>
 
 <script>
-import { fetchUserData } from '@/api'
+import { preSubmit } from '@/api'
+import Modal from './preModal.vue'
 
 export default {
+    components:{
+        Modal
+    },
     name: 'home',
     data() {
         return {
-            userInfo: '',
+            isShowModal:false
         }
     },
     methods: {
-        getUserData() {
-            fetchUserData().then(res => {
-                this.userInfo = JSON.stringify(res, null, 4)
+        handlePre(){
+            this.isShowModal=true
+        },
+        modalSure(row){
+            let form={
+                ...row,
+                orderStart:row.date[0],
+                orderEnd:row.date[1]
+            }
+            preSubmit(form).then(res=>{
+                if(res.code==200){
+                    this.$message.success("预约成功!")
+                    this.isShowModal=false
+                }else{
+                    this.$message.error(res.msg)
+                }
             })
         },
+        modalCancel(){
+            this.isShowModal=false
+        }
     },
 }
 </script>
@@ -37,5 +63,17 @@ export default {
     padding: 10px;
     border-radius: 5px;
     background: #fff;
+    position: relative;
+}
+.btn{
+    position: absolute;
+    top: 30px;
+    left: 30px;
+}
+.banner{
+    widows: 100%;
+}
+.banner img{
+    width: 100%;
 }
 </style>

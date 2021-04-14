@@ -10,13 +10,10 @@
                     <el-option
                       v-for="item in options"
                       :key="item.value"
-                      :label="item.label"
-                      :value="item.value">
+                      :label="item.typeName"
+                      :value="item.type">
                     </el-option>
                   </el-select>
-                </el-form-item>
-                <el-form-item label="预约人姓名" prop="memberId">
-                    <el-input v-model="ruleForm.memberId"></el-input>
                 </el-form-item>
                 <el-form-item prop="date" label="时间">
                     <el-date-picker
@@ -40,7 +37,7 @@
 </el-dialog>
 </template>
 <script>
-
+import {getServicesTypes} from '@/api'
 export default {
     props:{
         isShowModal:{
@@ -55,6 +52,13 @@ export default {
                 set: function (val) { }
             }
         },
+        created(){
+          getServicesTypes().then(res=>{
+            if(res.code==200&&res.data){
+              this.options=res.data
+            }
+          })
+        },
     data() {
       return {
         ruleForm:{
@@ -63,20 +67,11 @@ export default {
                 memberId:'',
                 remarks:''
             },
-        options: [{
-          value: 1,
-          label: '修车'
-        }, {
-          value: 2,
-          label: '保险'
-        }, {
-          value: 3,
-          label: '洗车'
-        }],
+        options: [],
         rules: {
-           memberId: [
-            { required: true, message: '请输入预约人姓名', trigger: 'blur' },
-          ],
+          //  memberId: [
+          //   { required: true, message: '请输入预约人姓名', trigger: 'blur' },
+          // ],
           type: [
               { required: true, message: '请选择服务类型', trigger: 'change' }
             ],
@@ -90,6 +85,7 @@ export default {
       submitForm(formName) {
         this.$refs[formName].validate((valid) => {
           if (valid) {
+            this.ruleForm.memberId=JSON.parse(localStorage.getItem('userinfo')).id
             this.$emit('modalSure',this.ruleForm)
           } else {
             return false;

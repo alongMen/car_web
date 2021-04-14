@@ -68,6 +68,30 @@ export const asyncRoutes = {
         meta: { title: '汽车饰品商店' },
         component: () => import('@/views/shop.vue'),
     },
+    shoping:{
+        path: '/shoping',
+        name: 'shoping',
+        meta: { title: '商品管理' },
+        component: () => import('@/views/shoping.vue'),
+    },
+    ordermanger:{
+        path: '/ordermanger',
+        name: 'ordermanger',
+        meta: { title: '订单管理' },
+        component: () => import('@/views/ordermanger.vue'),
+    },
+    shoppingCar:{
+        path: '/shoppingCar',
+        name: 'shoppingCar',
+        meta: { title: '我的购物车' },
+        component: () => import('@/views/shoppingCar.vue'),
+    },
+    order:{
+        path: '/order',
+        name: 'order',
+        meta: { title: '订单查看' },
+        component: () => import('@/views/order.vue'),
+    },
 }
 
 const createRouter = () => new Router({

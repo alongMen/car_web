@@ -14,7 +14,7 @@
           @changePage="handleChangePage"
           @handleSizeChange="handleSizeChange"
         />
-        <el-dialog title="收货地址" :visible.sync="dialogTableVisible">
+        <el-dialog title="会员信息" :visible.sync="dialogTableVisible">
           <el-card class="box-card">
             <div slot="header" class="clearfix">
                 <span>会员信息</span>
@@ -79,6 +79,7 @@ export default {
             // console.log(res)
             if(res.code==200&&res.data){
               this.tableData=res.data
+              this.total= parseInt(res.msg)
             }
           })
         },

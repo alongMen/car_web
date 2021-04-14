@@ -20,11 +20,35 @@ export function getclerkList(data) {
     return request.get('employee/emp-info/'+data)
 }
 export function getPreList(data) {
-    return request.get('order/find-order/reservation/'+data)
+    return request.get('order/find-order/reservation/'+data.page+'?mid='+data.mid)
 }
 export function preSubmit(data) {
     return request.post('order/submit-order',data)
 }
 export function setEmp(data) {
     return request.post('order/set-emp',data)
+}
+export function getServicesTypes(data) {
+    return request.get('service-type',data)
+}
+export function addNotice(data) {
+    return request.post('notice/save',data)
+}
+export function updateNotice(data) {
+    return request.post('notice/update',data)
+}
+export function getNotice(data) {
+    return request.get('notice/list/'+data)
+}
+export function delNotice(data) {
+    return request.get('notice/delete?id='+data.id)
+}
+export function delShoppingCar(data) {
+    return request.get('shopping-car/delete?id='+data.id)
+}
+export function getShoppingCar(data) {
+    return request.get('shopping-car/'+data.page+'?mid='+data.mid)
+}
+export function addShoppingCar(data) {
+    return request.post('shopping-car/save',data)
 }

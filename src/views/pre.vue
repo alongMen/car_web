@@ -16,7 +16,7 @@
         />
         <el-dialog title="指派服务人员" :visible.sync="dialogTableVisible">
           <el-card class="box-card">
-            <el-select v-model="empId" multiple placeholder="请选择">
+            <el-select v-model="empId"  placeholder="请选择">
                 <el-option
                 v-for="item in options"
                 :key="item.id"
@@ -43,14 +43,17 @@ export default {
         return{
           dialogTableVisible:false,
           tableModel: [
-          { attribute: 'id', dontSort: true, type: 'normal', title: '订单ID' },
+          { attribute: 'id', dontSort: true, type: 'normal', title: '订单ID',width:260 },
+          { attribute: 'memberNickName', dontSort: true, type: 'normal', title: '会员昵称' },
           { attribute: 'typeName', dontSort: true, type: 'normal', title: '服务类型' },
+          { attribute: 'empName', dontSort: true, type: 'normal', title: '服务负责人' },
+          { attribute: 'phoneNumber', dontSort: true, type: 'normal', title: '联系方式' },
           { attribute: 'orderStart', dontSort: true, type: 'normal', title: '服务开始时间' },
-          { attribute: 'remarks', dontSort: true, type: 'normal', title: '备注内容' },
-          { attribute: 'orderEnd', dontSort: true, type: 'normal', title: '服务结束时间' }
+          { attribute: 'orderEnd', dontSort: true, type: 'normal', title: '服务结束时间' },
+          { attribute: 'remarks', dontSort: true, type: 'normal', title: '备注内容' }
         ],
         tableData: [],
-        total: 20,
+        total: 0,
         pageSize: 10,
         currentPage: 1,
         orderId:'',
@@ -68,11 +71,12 @@ export default {
     },
     methods:{
         handleSure(){
-            setEmp({empId:this.empId.join(','),orderId:this.orderId}).then(res=>{
+            setEmp({empId:this.empId,orderId:this.orderId}).then(res=>{
                 if(res.code==200){
                     this.empId=''
                     this.$message.success(res.msg)
                     this.dialogTableVisible=false
+                    this.initTableData()
                 }
             })
         },
@@ -81,10 +85,11 @@ export default {
         this.dialogTableVisible=true
       },
         initTableData(){
-          getPreList(this.currentPage).then(res=>{
+          getPreList({page:this.currentPage,mid:''}).then(res=>{
             // console.log(res)
             if(res.code==200&&res.data){
               this.tableData=res.data
+              this.total= parseInt(res.msg)
             }
           })
         },

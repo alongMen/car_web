@@ -81,6 +81,7 @@ export default {
             // console.log(res)
             if(res.code==200&&res.data){
               this.tableData=res.data
+              this.total= parseInt(res.msg)
             }
           })
         },

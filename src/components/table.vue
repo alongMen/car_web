@@ -133,7 +133,7 @@
                 background
                 style="margin-top:10px;text-align:left;"
                 @current-change="currutPage"
-                :page-sizes="[5, 10, 20, 50]"
+                :page-sizes="[10]"
                 :page-size='pSize'
                 layout="sizes, prev, pager, next,total"
                 :total="tPage"

@@ -7,6 +7,7 @@
             </div>
         </div>
         <Modal
+            v-if="isShowModal"
             :isShowModal="isShowModal"
             @modalCancel="modalCancel"
             @modalSure="modalSure"

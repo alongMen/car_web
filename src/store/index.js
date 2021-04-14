@@ -45,6 +45,30 @@ const store = new Vuex.Store({
                 text: '汽车饰品商店',
             },
             {
+                name:'shoping',
+                size: 18, // icon大小
+                type: 'md-arrow-forward', // icon类型
+                text: '商品管理',
+            },
+            {
+                name:'shoppingCar',
+                size: 18, // icon大小
+                type: 'md-arrow-forward', // icon类型
+                text: '我的购物车',
+            },
+            {
+                name:'ordermanger',
+                size: 18, // icon大小
+                type: 'md-arrow-forward', // icon类型
+                text: '订单管理',
+            },
+            {
+                name:'order',
+                size: 18, // icon大小
+                type: 'md-arrow-forward', // icon类型
+                text: '订单查看',
+            },
+            {
                 name:'notice',
                 size: 18, // icon大小
                 type: 'ios-paper', // icon类型

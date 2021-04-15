@@ -8,9 +8,10 @@
             <div class="car-item" v-for="(item, index) in list" :key="index">
                 <img src="item.imgUrl" alt="" />
                 <p>{{ item.goodsName }}</p>
-                <el-input-number size="small" v-model="item.num" :min="1" :max="10" label="数量"></el-input-number>
-                <p>{{ item.price }}</p>
-                <el-button type="danger" @click="delCar(item)">删除</el-button>
+                <p>数量：<el-input-number size="small" v-model="item.num" :min="1" :max="10" label="数量"></el-input-number></p>
+                <p style="color:red"><span>总价：¥ </span>{{ item.price }}*{{item.num}}={{(item.price*item.num).toString()+'.00'}}</p>
+                <el-button type="primary" style="width:140px" size="small" @click="goBuy(item)">购买</el-button>
+                <el-button type="danger" style="width:140px" size="small" @click="delCar(item)">删除</el-button>
             </div>
         </el-card>
     </div>
@@ -28,6 +29,9 @@ export default {
         this.initTableData();
     },
     methods: {
+        goBuy(){
+            this.$message.error('未能付款，不能购买喔！')
+        },
         initTableData() {
             getShoppingCar({ page: 1, mid: JSON.parse(localStorage.getItem("userinfo")).id }).then(res => {
                 if (res.code == 200 && res.data) {
@@ -89,6 +93,7 @@ export default {
     width: 100%;
     padding: 10px;
     display: flex;
+    background-color: rgb(189, 243, 243);
     justify-content: space-around;
     border: 1px solid #ccc;
     border-radius: 10px;

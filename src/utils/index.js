@@ -1,10 +1,10 @@
 import { resetRouter } from '@/router'
+import store from '../store'
 
 export function resetTokenAndClearUser() {
     // 退出登陆 清除用户资料
-    localStorage.setItem('token', '')
-    localStorage.setItem('userImg', '')
-    localStorage.setItem('userName', '')
+    localStorage.clear()
+    store.state.menuItems=[]
     // 重设路由
     resetRouter()
 }

@@ -11,6 +11,8 @@ export default function createRoutes(data) {
         children,
     })
 
+    console.log(11111111111111111)
+    console.log(data)
     data.forEach(item => {
         generateRoutes(children, item)
     })

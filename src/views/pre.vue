@@ -1,7 +1,7 @@
 <template>
     <div class="member_page">
         <Table
-          :need-operation-area="true"
+          :need-operation-area="isAdmin"
           :pSize="pageSize"
           :tPage="total"
           :table-model="tableModel"
@@ -58,11 +58,13 @@ export default {
         currentPage: 1,
         orderId:'',
         empId:'',
-        options: []
+        options: [],
+        isAdmin:false
         }
     },
     created(){
-        getclerkList(1).then(res=>{
+      this.isAdmin=JSON.parse(localStorage.getItem('userinfo')).nickName=='abc'?true:false
+      getclerkList(1).then(res=>{
             if(res.code==200&&res.data){
                 this.options=res.data
             }
@@ -85,7 +87,11 @@ export default {
         this.dialogTableVisible=true
       },
         initTableData(){
-          getPreList({page:this.currentPage,mid:''}).then(res=>{
+          let mid=JSON.parse(localStorage.getItem('userinfo')).id
+          if(mid==0){
+            mid= ''
+          }
+        getPreList({mid:mid,page:this.currentPage}).then(res=>{
             // console.log(res)
             if(res.code==200&&res.data){
               this.tableData=res.data

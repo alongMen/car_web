@@ -63,6 +63,7 @@ export default {
                 this.isShowLoading = true
                 // 登陆成功 设置用户信息
                 login({username:this.account,password:this.pwd}).then(res=>{
+                    this.isShowLoading = false
                     if(res.code==200&&res.data){
                         localStorage.setItem('userImg', 'https://avatars3.githubusercontent.com/u/22117876?s=460&v=4')
                         localStorage.setItem('userName', res.data.nickName)

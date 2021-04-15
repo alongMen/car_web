@@ -4,7 +4,7 @@
             <el-button type="warning" @click="handleAdd">发布公告</el-button>
         </el-row>
         <Table
-            :need-operation-area="true"
+            :need-operation-area="isAdmin"
             :pSize="pageSize"
             :tPage="total"
             :table-model="tableModel"

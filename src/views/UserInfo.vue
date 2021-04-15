@@ -2,8 +2,8 @@
     <div class="userinfo">
         <el-card class="box-card">
             <div slot="header" class="clearfix">
-                <span>会员信息</span>
-                <el-button style="float: right; padding: 3px 0" type="text" @click="handleChange">修改信息</el-button>
+                <span>我的资料</span>
+                <el-button style="float: right; padding: 3px 0" type="text" v-if="!isAdmin" @click="handleChange">修改信息</el-button>
             </div>
             <div class="user_box">
                 <div class="item">
@@ -44,11 +44,13 @@ export default {
     data() {
         return {
             userinfo:{},
-            isShowModal:false
+            isShowModal:false,
+            isAdmin:false
         };
     },
     created(){
         this.userinfo=JSON.parse(localStorage.getItem('userinfo'))
+        this.isAdmin=JSON.parse(localStorage.getItem('userinfo')).nickName=='abc'
     },
     methods:{
         handleChange(){
@@ -58,6 +60,7 @@ export default {
             this.isShowModal=false
         },
         modalSure(row){
+            row.phoneNumber=row.phoneNumber.toString()
             changeUserinfo(row).then(res=>{
                 if(res.code==200){
                     localStorage.setItem('userinfo',JSON.stringify(res.data))

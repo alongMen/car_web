@@ -1,7 +1,7 @@
 <template>
     <div class="home-container">
         <div class="home-content">
-            <el-button type="danger" icon="el-icon-phone-outline" class="btn" @click="handlePre">立即预约</el-button>
+            <el-button type="danger" v-if="!isAdmin" icon="el-icon-phone-outline" class="btn" @click="handlePre">立即预约</el-button>
             <div class="banner">
                 <img src="@/assets/imgs/banner.png" alt="">
             </div>
@@ -26,8 +26,13 @@ export default {
     name: 'home',
     data() {
         return {
-            isShowModal:false
+            isShowModal:false,
+            isAdmin:false
         }
+    },
+    created(){
+        this.isAdmin=JSON.parse(localStorage.getItem('userinfo')).nickName=='abc'
+
     },
     methods: {
         handlePre(){
